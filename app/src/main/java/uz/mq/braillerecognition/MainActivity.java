@@ -51,7 +51,7 @@ import java.sql.Time;
 
 import static uz.mq.braillerecognition.HistoryDB.getHistory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews(){
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         bottomActionBar = (LinearLayout) findViewById(R.id.bottomActionBar);
         ((LinearLayout) findViewById(R.id.btnChange)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this));
+        adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this), false);
         historyList.setAdapter(adapter);
         if (getHistory(MainActivity.this).size() > 0){
             hideIntro();
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this));
+                        adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this), false);
                         historyList.setAdapter(adapter);
                     }
                 });
@@ -362,6 +363,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_modern_menu);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.nav_favorite:
+                startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
+                break;
+        }
+        drawer.close();
+        return false;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

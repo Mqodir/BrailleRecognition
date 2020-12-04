@@ -11,15 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static uz.mq.braillerecognition.HistoryDB.removeFav;
 import static uz.mq.braillerecognition.HistoryDB.switchFav;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder>{
 
     Context ctx;
     private ArrayList<HistoryModel> list = new ArrayList<>();
-
-    public HistoryAdapter(Context ctx, ArrayList<HistoryModel> list) {
+    boolean isFavs;
+    public HistoryAdapter(Context ctx, ArrayList<HistoryModel> list, boolean isFavs) {
         this.ctx = ctx;
+        this.isFavs = isFavs;
         this.list = list;
     }
 
@@ -37,9 +39,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchFav(ctx, position);
-                list.get(position).setFav(!item.getFav());
-                notifyDataSetChanged();
+                if (isFavs){
+                    removeFav(ctx, item.getDate());
+                    list.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, list.size());
+                }else{
+                    switchFav(ctx, position);
+                    list.get(position).setFav(!item.getFav());
+                    notifyDataSetChanged();
+                }
             }
         });
     }

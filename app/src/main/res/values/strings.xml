@@ -20,6 +20,7 @@
     <string name="welcomle">Добро пожаловать!</string>
     <string name="instruction">Для начало выберите тип перевода и способ ввода данных</string>
 
+    <string name="empty">Пусто</string>
     <string name="history">История</string>
     <string name="favorite">Избранное</string>
     <string name="share">Поделится</string>
