@@ -14,7 +14,7 @@
 
     <string name="camera">Камера</string>
     <string name="importImg">Импорт</string>
-    <string name="keyboard">Коавиатура</string>
+    <string name="keyboard">Клавиатура</string>
     <string name="braille">Брайль</string>
     <string name="text">Текст</string>
     <string name="welcomle">Добро пожаловать!</string>
@@ -25,4 +25,6 @@
     <string name="share">Поделится</string>
     <string name="rate">Оценить</string>
     <string name="info">О приложении</string>
+
+    <string name="select_image">Выберите изображение</string>
 </resources>

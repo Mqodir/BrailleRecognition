@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
+
     <ImageView
         android:layout_width="match_parent"
         android:src="@drawable/illustration"
@@ -42,7 +43,7 @@
         android:layout_width="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnChange"
+        app:layout_constraintBottom_toTopOf="@id/bottomActionBar"
         android:layout_marginBottom="8dp"
         android:text="@string/instruction"
         android:gravity="center"
@@ -53,142 +54,157 @@
         android:textSize="18dp"
         android:layout_height="wrap_content"/>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/bottomActionBar"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cardAction"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="60dp"
-        android:id="@+id/btnChange"
-        android:layout_marginRight="60dp"
-        app:cardCornerRadius="30dp"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:padding="12dp"
-            android:orientation="horizontal"
-            android:weightSum="7"
-            android:gravity="center"
-            android:clickable="true"
-            android:background="@drawable/btn_white"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:src="@drawable/braille_z_black"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_height="30dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/braille"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:padding="2dp"
-                android:src="@drawable/ic_icons8_data_transfer"
-                android:layout_height="26dp"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical|right"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/braille"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_icons8_z"
-                    android:layout_height="30dp"/>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="30dp"
-        android:id="@+id/cardAction"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="12dp"
         android:layout_height="wrap_content">
-        <LinearLayout
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:weightSum="3"
-            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            app:cardCornerRadius="30dp"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:clickable="true"
+                android:layout_width="match_parent"
                 android:padding="12dp"
-                android:background="@drawable/btn_action"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:weightSum="7"
+                android:gravity="center"
+                android:id="@+id/btnChange"
+                android:clickable="true"
+                android:background="@drawable/btn_white"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:src="@drawable/braille_z_black"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:id="@+id/ivLeft"
+                        android:layout_height="30dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/braille"
+                        android:id="@+id/tvLeft"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_icons8_compact_camera"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/camera"
-                    android:textSize="16dp"
-                    android:textColor="@color/colotTextHighContrast"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_icons8_data_transfer"
+                    android:layout_height="26dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical|right"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/braille"
+                        android:id="@+id/tvRight"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:id="@+id/ivRight"
+                        android:src="@drawable/ic_icons8_z"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="30dp"
+            android:id="@+id/cardAction"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:clickable="true"
-                android:padding="12dp"
-                android:background="@drawable/btn_action"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:weightSum="3"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_icons8_portrait_mode_scanning"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/importImg"
-                    android:textSize="16dp"
-                    android:textColor="@color/colotTextHighContrast"
-                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:id="@+id/btnCamera"
+                    android:padding="12dp"
+                    android:background="@drawable/btn_action"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_icons8_compact_camera"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/camera"
+                        android:textSize="16dp"
+                        android:textColor="@color/colotTextHighContrast"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:id="@+id/btnImport"
+                    android:padding="12dp"
+                    android:background="@drawable/btn_action"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_icons8_portrait_mode_scanning"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/importImg"
+                        android:textSize="16dp"
+                        android:textColor="@color/colotTextHighContrast"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:id="@+id/btnKeyboard"
+                    android:padding="12dp"
+                    android:background="@drawable/btn_action"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:id="@+id/ivKeyboard"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_icons8_braille"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/keyboard"
+                        android:textSize="16dp"
+                        android:textColor="@color/colotTextHighContrast"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:clickable="true"
-                android:padding="12dp"
-                android:background="@drawable/btn_action"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_icons8_braille"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/keyboard"
-                    android:textSize="16dp"
-                    android:textColor="@color/colotTextHighContrast"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
