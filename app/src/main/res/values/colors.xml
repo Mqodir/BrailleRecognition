@@ -7,4 +7,5 @@
     <color name="colorText">#303030</color>
     <color name="colotTextHighContrast">#ffffff</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorAccentLight">#E0EEEE</color>
 </resources>

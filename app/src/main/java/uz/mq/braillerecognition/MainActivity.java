@@ -103,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        ((LinearLayout) findViewById(R.id.btnKeyboard)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tState.equals("b->t")){
+                    startActivity(new Intent(MainActivity.this, BrailleKeyboardActivity.class));
+                }else{
+                    //Start Activity for t->b keyboard
+                }
+            }
+        });
     }
 
     private void requestPermissions(int code){

@@ -26,5 +26,14 @@
     <string name="rate">Оценить</string>
     <string name="info">О приложении</string>
 
+    <string name="translation">Перевод:</string>
+    <string name="translation_">Перевод на:</string>
+
+
+    <string-array name="ABC">
+        <item>Латын</item>
+        <item>Кириллица</item>
+    </string-array>
+
     <string name="select_image">Выберите изображение</string>
 </resources>
