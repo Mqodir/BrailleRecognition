@@ -10,4 +10,12 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="camera">Камера</string>
+    <string name="importImg">Импорт</string>
+    <string name="keyboard">Коавиатура</string>
+    <string name="braille">Брайль</string>
+    <string name="text">Текст</string>
+    <string name="welcole">Добро пожаловать!</string>
+    <string name="instruction">Для начало выберите тип перевода и способ ввода данных</string>
 </resources>
