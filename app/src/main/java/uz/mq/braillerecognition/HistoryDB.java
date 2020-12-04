@@ -30,6 +30,18 @@ public class HistoryDB {
         sharedPreference.edit().putString("History", gson.toJson(historyModels)).apply();
     }
 
+
+    public static void switchFav(Context ctx, int index){
+        ArrayList<HistoryModel> historyModels;
+        Gson gson = new Gson();
+        SharedPreferences sharedPreference = ctx.getSharedPreferences("History", Context.MODE_PRIVATE);
+        String cash_str = sharedPreference.getString("History", "empty");
+        Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
+        historyModels = gson.fromJson(cash_str, typeOfObjectsList);
+        historyModels.get(index).setFav(!historyModels.get(index).getFav());
+        sharedPreference.edit().putString("History", gson.toJson(historyModels)).apply();
+    }
+
     public static ArrayList<HistoryModel> getHistory(Context ctx){
         ArrayList<HistoryModel> historyModels;
         Gson gson = new Gson();

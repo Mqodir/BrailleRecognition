@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewOutlineProvider;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +31,9 @@ import com.yalantis.ucrop.UCrop;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,11 +41,15 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Time;
+
+import static uz.mq.braillerecognition.HistoryDB.getHistory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,9 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
     AppBarLayout appBarLayout;
     DrawerLayout drawer;
+    RecyclerView historyList;
     ViewOutlineProvider outlineProvider;
-
+    NestedScrollView mainScroll;
+    HistoryAdapter adapter;
     LinearLayout bottomActionBar;
+    boolean isBottomBarShow = true;
     private String tState = "b->t";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +123,62 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        historyList = (RecyclerView) findViewById(R.id.mainList);
+        historyList.setLayoutManager(new LinearLayoutManager(this));
+        mainScroll = (NestedScrollView) findViewById(R.id.mainScroll);
+        mainScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollY = mainScroll.getScrollY();
+                Log.e("Scroll", scrollY+"");
+                if (scrollY >= 10){
+                    setActionBarShadow(true);
+                    if (isBottomBarShow){
+                        showBottomBar(false);
+                    }
+                }else{
+                    setActionBarShadow(false);
+                    if (!isBottomBarShow){
+                        showBottomBar(true);
+                    }
+                }
+            }
+        });
+
+        adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this));
+        historyList.setAdapter(adapter);
+        if (getHistory(MainActivity.this).size() > 0){
+            hideIntro();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SystemClock.sleep(500);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this));
+                        historyList.setAdapter(adapter);
+                    }
+                });
+            }
+        }).start();
+        super.onStart();
+    }
+
+    private void showBottomBar(boolean show){
+        if (show){
+            bottomActionBar.animate().scaleY(1f).scaleX(1f).translationY(0).setDuration(300);
+            isBottomBarShow = true;
+        }else{
+            bottomActionBar.animate().scaleY(0.6f).scaleX(0.6f).translationY(300).setDuration(300);
+            isBottomBarShow = false;
+        }
     }
 
     private void requestPermissions(int code){
@@ -234,6 +300,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void hideIntro(){
+        ((ConstraintLayout) findViewById(R.id.mainPage)).setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        ((ImageView) findViewById(R.id.welcome_illustration)).setVisibility(View.GONE);
+        ((TextView) findViewById(R.id.tvWelcome)).setVisibility(View.GONE);
+        ((TextView) findViewById(R.id.instruction)).setVisibility(View.GONE);
+    }
 
     private void switchTranslation(final String newState){
         bottomActionBar.animate()
@@ -303,6 +375,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case android.R.id.home:
                 drawer.openDrawer(Gravity.LEFT);
+                break;
+            case R.id.action_info:
+                Log.e("Size", getHistory(MainActivity.this).size()+"");
                 break;
         }
         return super.onOptionsItemSelected(item);

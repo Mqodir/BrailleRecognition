@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorWelcome"
+    android:id="@+id/mainPage"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -25,19 +28,31 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="22dp"
         android:textStyle="bold"
+        android:id="@+id/tvWelcome"
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:textColor="@color/colorAccent"
         android:layout_height="wrap_content"/>
-
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/mainScroll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/mainList"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/mainList"
+                android:paddingBottom="12dp"
+                android:paddingTop="8dp"
+                android:clipToPadding="true"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:layout_width="match_parent"
@@ -46,6 +61,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomActionBar"
         android:layout_marginBottom="8dp"
         android:text="@string/instruction"
+        android:id="@+id/instruction"
         android:gravity="center"
         android:paddingLeft="24dp"
         android:drawablePadding="4dp"
