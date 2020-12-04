@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Braille Recognition</string>
+    <string name="app_version">1.0.0(Beta)</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -16,6 +17,12 @@
     <string name="keyboard">Коавиатура</string>
     <string name="braille">Брайль</string>
     <string name="text">Текст</string>
-    <string name="welcole">Добро пожаловать!</string>
+    <string name="welcomle">Добро пожаловать!</string>
     <string name="instruction">Для начало выберите тип перевода и способ ввода данных</string>
+
+    <string name="history">История</string>
+    <string name="favorite">Избранное</string>
+    <string name="share">Поделится</string>
+    <string name="rate">Оценить</string>
+    <string name="info">О приложении</string>
 </resources>
