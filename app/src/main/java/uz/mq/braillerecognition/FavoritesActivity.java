@@ -57,8 +57,6 @@ public class FavoritesActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void setActionBar(){
         getSupportActionBar().setTitle((Html.fromHtml("<font align=\"center\" color=\""+String.format("#%06x", ContextCompat.getColor(this, R.color.colorText) & 0xffffff)+"\">"+getString(R.string.favorite)+"</font>")));
         getSupportActionBar().setElevation(0);

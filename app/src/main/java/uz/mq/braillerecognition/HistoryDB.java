@@ -9,6 +9,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +67,7 @@ public class HistoryDB {
         String cash_str = sharedPreference.getString("History", "empty");
         Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
         historyModels = gson.fromJson(cash_str, typeOfObjectsList);
+        Collections.reverse(historyModels);
         return historyModels;
     }
 
@@ -75,12 +78,14 @@ public class HistoryDB {
         String cash_str = sharedPreference.getString("History", "empty");
         Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
         historyModels = gson.fromJson(cash_str, typeOfObjectsList);
+        ArrayList<HistoryModel> favsModels;
+        favsModels = new ArrayList<>();
         for (int i=0; i<historyModels.size(); i++){
-            if (!historyModels.get(i).getFav()){
-                historyModels.remove(i);
+            if (historyModels.get(i).getFav()){
+                favsModels.add(historyModels.get(i));
             }
         }
-        return historyModels;
+        return favsModels;
     }
 
 }

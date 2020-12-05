@@ -45,9 +45,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, list.size());
                 }else{
-                    switchFav(ctx, position);
-                    list.get(position).setFav(!item.getFav());
-                    notifyDataSetChanged();
+                    switchFav(ctx, list.size()-position-1);
+                    list.get(list.size()-position-1).setFav(!item.getFav());
+                    if (!item.getFav()){
+                        holder.btnFav.setImageResource(R.drawable.ic_icons8_christmas_star);
+                    }else {
+                        holder.btnFav.setImageResource(R.drawable.ic_icons8_star_1);
+                    }
                 }
             }
         });
