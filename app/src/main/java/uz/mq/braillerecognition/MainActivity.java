@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (tState.equals("b->t")){
                     startActivity(new Intent(MainActivity.this, BrailleKeyboardActivity.class));
                 }else{
-                    //Start Activity for t->b keyboard
+                    startActivity(new Intent(MainActivity.this, TextToBraille.class));
                 }
             }
         });

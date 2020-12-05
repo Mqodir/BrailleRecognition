@@ -38,7 +38,9 @@ public class BrailleKeyboardActivity extends AppCompatActivity {
     }
 
     public void onStop () {
-        addToHistory(BrailleKeyboardActivity.this, new HistoryModel(tvBraille.getText().toString(), tvText.getText().toString(), getCurrentDate(), false));
+        if (tvBraille.getText().toString().equals("")){
+            addToHistory(BrailleKeyboardActivity.this, new HistoryModel(tvBraille.getText().toString(), tvText.getText().toString(), getCurrentDate(), false));
+        }
         super.onStop();
     }
 
