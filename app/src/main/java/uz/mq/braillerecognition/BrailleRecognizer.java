@@ -30,7 +30,7 @@ public class BrailleRecognizer {
     OkHttpClient client;
     CookieManager cookieManager;
     private static String LOG = "BrailleRecognizer";
-    public static String SERVER_HOST = "http://angelina-reader.ru/";
+    public static String SERVER_HOST = "https://TYPE_YOUR_SERVER_HOST";
     String token = "";
     public BrailleRecognizer(Context ctx) {
         this.ctx = ctx;

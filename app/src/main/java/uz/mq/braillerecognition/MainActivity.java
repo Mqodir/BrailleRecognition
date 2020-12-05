@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -214,6 +215,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void showInfoDialog(){
+
+        final BottomSheetDialog bottomSheerDialog = new BottomSheetDialog(MainActivity.this, R.style.SheetDialog);
+        final View parentView = getLayoutInflater().inflate(R.layout.info ,null);
+
+        bottomSheerDialog.setContentView(parentView);
+        bottomSheerDialog.show();
+    }
+
     String filenamecamera;
     Uri imageUricamera;
     private void startCameraIntent(){
@@ -288,7 +298,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                     out.flush();
                     out.close();
-                    startActivity(new Intent(MainActivity.this, RecognizeActivity.class).putExtra("file", filename));
+                    if (tState.equals("b->t")){
+                        startActivity(new Intent(MainActivity.this, RecognizeActivity.class).putExtra("file", filename));
+                    }else{
+                        Toast.makeText(MainActivity.this, "Эта функция пока не доступна!", Toast.LENGTH_LONG).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -371,6 +385,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_favorite:
                 startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
                 break;
+            case R.id.nav_info:
+                showInfoDialog();
+                break;
         }
         drawer.close();
         return false;
@@ -391,7 +408,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawer.openDrawer(Gravity.LEFT);
                 break;
             case R.id.action_info:
-                startActivity(new Intent(MainActivity.this, RecognizeActivity.class));
+                showInfoDialog();
                 break;
         }
         return super.onOptionsItemSelected(item);

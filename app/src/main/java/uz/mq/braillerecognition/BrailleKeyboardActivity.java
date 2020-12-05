@@ -1,5 +1,6 @@
 package uz.mq.braillerecognition;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -11,6 +12,8 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -46,6 +49,17 @@ public class BrailleKeyboardActivity extends AppCompatActivity {
             addToHistory(BrailleKeyboardActivity.this, new HistoryModel(tvBraille.getText().toString(), tvText.getText().toString(), getCurrentDate(), false));
         }
         super.onStop();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initViews(){
