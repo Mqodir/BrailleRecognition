@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -19,6 +22,7 @@ public class TextToBraille extends AppCompatActivity {
     EditText edText;
     TextView tvBraille;
     String data;
+    ScrollView mainScroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +50,23 @@ public class TextToBraille extends AppCompatActivity {
 
             }
         });
+        mainScroll = (ScrollView) findViewById(R.id.mainScroll);
+        mainScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollY = mainScroll.getScrollY();
+                Log.e("Scroll", scrollY+"");
+                if (scrollY >= 10){
+                    getSupportActionBar().setElevation(10);
+                }else{
+                    getSupportActionBar().setElevation(0);
+                }
+            }
+        });
     }
 
     public void onStop () {
-        if (tvBraille.getText().toString().equals("")){
+        if (!tvBraille.getText().toString().equals("")){
             addToHistory(TextToBraille.this, new HistoryModel(tvBraille.getText().toString(), edText.getText().toString(), getCurrentDate(), false));
         }
         super.onStop();

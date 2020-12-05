@@ -8,6 +8,7 @@
     tools:context=".BrailleKeyboardActivity">
     <ScrollView
         android:layout_width="match_parent"
+        android:id="@+id/mainScroll"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
                         android:id="@+id/tvBraille"
                         style="@style/brailleText"
                         android:fontFamily="@font/braille"
-                        android:text="asdfasdfasdf"
+
                         android:textColor="@color/colotTextHighContrast"
                         android:textSize="32dp"
                         android:layout_height="wrap_content"/>

@@ -61,31 +61,40 @@ public class HistoryDB {
     }
 
     public static ArrayList<HistoryModel> getHistory(Context ctx){
-        ArrayList<HistoryModel> historyModels;
+        ArrayList<HistoryModel> historyModels = new ArrayList<>();
         Gson gson = new Gson();
         SharedPreferences sharedPreference = ctx.getSharedPreferences("History", Context.MODE_PRIVATE);
         String cash_str = sharedPreference.getString("History", "empty");
-        Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
-        historyModels = gson.fromJson(cash_str, typeOfObjectsList);
-        Collections.reverse(historyModels);
-        return historyModels;
+        if (!cash_str.equals("empty")){
+            Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
+            historyModels = gson.fromJson(cash_str, typeOfObjectsList);
+            Collections.reverse(historyModels);
+            return historyModels;
+        }else{
+            return historyModels;
+        }
     }
 
     public static ArrayList<HistoryModel> getFavs(Context ctx){
-        ArrayList<HistoryModel> historyModels;
+        ArrayList<HistoryModel> historyModels = new ArrayList<>();
         Gson gson = new Gson();
         SharedPreferences sharedPreference = ctx.getSharedPreferences("History", Context.MODE_PRIVATE);
         String cash_str = sharedPreference.getString("History", "empty");
-        Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
-        historyModels = gson.fromJson(cash_str, typeOfObjectsList);
-        ArrayList<HistoryModel> favsModels;
-        favsModels = new ArrayList<>();
-        for (int i=0; i<historyModels.size(); i++){
-            if (historyModels.get(i).getFav()){
-                favsModels.add(historyModels.get(i));
+
+        if (!cash_str.equals("empty")){
+            Type typeOfObjectsList = new TypeToken<ArrayList<HistoryModel>>() {}.getType();
+            historyModels = gson.fromJson(cash_str, typeOfObjectsList);
+            ArrayList<HistoryModel> favsModels;
+            favsModels = new ArrayList<>();
+            for (int i=0; i<historyModels.size(); i++){
+                if (historyModels.get(i).getFav()){
+                    favsModels.add(historyModels.get(i));
+                }
             }
+            return favsModels;
+        }else{
+            return historyModels;
         }
-        return favsModels;
     }
 
 }

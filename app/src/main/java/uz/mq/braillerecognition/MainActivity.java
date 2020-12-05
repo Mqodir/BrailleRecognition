@@ -163,6 +163,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        if (getHistory(MainActivity.this).size() > 0){
+                            hideIntro();
+                        }
                         adapter = new HistoryAdapter(MainActivity.this, getHistory(MainActivity.this), false);
                         historyList.setAdapter(adapter);
                     }
@@ -277,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String filename = "BrailleRecognition/upload.jpg";
 
                 File sd = Environment.getExternalStorageDirectory();
-                File dest = new File(sd, filename);
+                final File dest = new File(sd, filename);
 
                 Log.e("FileName", dest.getPath());
                 try {
@@ -285,9 +288,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                     out.flush();
                     out.close();
-                    //**********************************
-                    //* Upload to server AND recognize *
-                    //**********************************
+                    startActivity(new Intent(MainActivity.this, RecognizeActivity.class).putExtra("file", filename));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -390,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawer.openDrawer(Gravity.LEFT);
                 break;
             case R.id.action_info:
-                Log.e("Size", getHistory(MainActivity.this).size()+"");
+                startActivity(new Intent(MainActivity.this, RecognizeActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

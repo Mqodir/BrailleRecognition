@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import static uz.mq.braillerecognition.BrailleHelper.getLatinFormArray;
@@ -27,6 +30,7 @@ public class BrailleKeyboardActivity extends AppCompatActivity {
     boolean[] value = new boolean[6];
     LinearLayout btnLett, btnNum;
     TextView tvLett, tvNumm;
+    ScrollView mainScroll;
     TextView tvBraille, tvText;
 
     @Override
@@ -38,7 +42,7 @@ public class BrailleKeyboardActivity extends AppCompatActivity {
     }
 
     public void onStop () {
-        if (tvBraille.getText().toString().equals("")){
+        if (!tvBraille.getText().toString().equals("")){
             addToHistory(BrailleKeyboardActivity.this, new HistoryModel(tvBraille.getText().toString(), tvText.getText().toString(), getCurrentDate(), false));
         }
         super.onStop();
@@ -87,6 +91,19 @@ public class BrailleKeyboardActivity extends AppCompatActivity {
                 }
             });
         }
+        mainScroll = (ScrollView) findViewById(R.id.mainScroll);
+        mainScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollY = mainScroll.getScrollY();
+                Log.e("Scroll", scrollY+"");
+                if (scrollY >= 10){
+                    getSupportActionBar().setElevation(10);
+                }else{
+                    getSupportActionBar().setElevation(0);
+                }
+            }
+        });
     }
 
     private void chekChars(){

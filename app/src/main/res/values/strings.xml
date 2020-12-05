@@ -30,6 +30,9 @@
     <string name="translation">Перевод:</string>
     <string name="translation_">Перевод на:</string>
 
+    <string name="pleaseWaint">Пожалуйста подождите</string>
+    <string name="error">Ошибка пожалуйста попробуйте сново!</string>
+    <string name="nodata">Не удалось распознать текст пожалуйста попробуйте снова!</string>
 
     <string-array name="ABC">
         <item>Латын</item>

@@ -160,7 +160,7 @@
                     android:gravity="center"
                     android:clickable="true"
                     android:id="@+id/btnCamera"
-                    android:padding="12dp"
+                    android:padding="16dp"
                     android:background="@drawable/btn_action"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
@@ -171,6 +171,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:text="@string/camera"
+                        android:layout_marginTop="4dp"
                         android:textSize="16dp"
                         android:textColor="@color/colotTextHighContrast"
                         android:layout_height="wrap_content"/>
@@ -181,7 +182,7 @@
                     android:gravity="center"
                     android:clickable="true"
                     android:id="@+id/btnImport"
-                    android:padding="12dp"
+                    android:padding="16dp"
                     android:background="@drawable/btn_action"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
@@ -193,6 +194,7 @@
                         android:layout_width="wrap_content"
                         android:text="@string/importImg"
                         android:textSize="16dp"
+                        android:layout_marginTop="4dp"
                         android:textColor="@color/colotTextHighContrast"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -202,7 +204,7 @@
                     android:gravity="center"
                     android:clickable="true"
                     android:id="@+id/btnKeyboard"
-                    android:padding="12dp"
+                    android:padding="16dp"
                     android:background="@drawable/btn_action"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
@@ -215,6 +217,7 @@
                         android:layout_width="wrap_content"
                         android:text="@string/keyboard"
                         android:textSize="16dp"
+                        android:layout_marginTop="4dp"
                         android:textColor="@color/colotTextHighContrast"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
