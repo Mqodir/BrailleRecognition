@@ -63,6 +63,9 @@ public class TextToBraille extends AppCompatActivity {
                 }
             }
         });
+        if (getIntent().getStringExtra("text") != null){
+            edText.setText(getIntent().getStringExtra("text"));
+        }
     }
 
     public void onStop () {

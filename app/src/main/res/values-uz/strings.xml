@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Braille Recognition</string>
+    <string name="app_version">1.0.0(Beta)</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="camera">Kamera</string>
+    <string name="importImg">Import</string>
+    <string name="keyboard">Klaviatura</string>
+    <string name="braille">Brayl</string>
+    <string name="text">Text</string>
+    <string name="welcomle">Xush kelibsiz!</string>
+    <string name="instruction">Boshlanishiga tarjina turi va ma\'lumotlarni kiritish uslubini tanlang</string>
+
+    <string name="empty">Malumotlar yo\'q</string>
+    <string name="history">Tarix</string>
+    <string name="favorite">Tanlanganlar</string>
+    <string name="share">Ulashish</string>
+    <string name="rate">Baho berish</string>
+    <string name="info">Ilova haqida</string>
+
+    <string name="translation">Tarjima:</string>
+    <string name="translation_">Ga tarjima:</string>
+
+    <string name="pleaseWaint">Intimos kuting</string>
+    <string name="error">Xatolik! iltimos qayta harakat qilib koring!</string>
+    <string name="nodata">Rasmda matn topilmadi iltimos qayta harakat qilib koring!</string>
+    <string name="clickback">Ilovdan chiqish uchun yana bir bor bosing</string>
+    <string name="cancel">Bekor qilish</string>
+    <string name="recognize_as">Qaysi alifbodan tarjina qilish:</string>
+    <string name="cyril">Kiril</string>
+    <string name="latin">Lotin</string>
+    <string name="save">Saqlash</string>
+    <string name="recognized_text">Tarjima qilingan matn:</string>
+    <string name="developed_by">Quyidagi komanda tomonidan ishlab chiqilgan:</string>
+    <string-array name="ABC">
+        <item>Lotin</item>
+        <item>Kiril</item>
+    </string-array>
+
+    <string name="select_image">Rasmni tanlang</string>
+    <string name="app_share">Brayl yozvini tarjima qiluvchi ilova</string>
+</resources>

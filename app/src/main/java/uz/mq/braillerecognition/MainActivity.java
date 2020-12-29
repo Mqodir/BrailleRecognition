@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.os.SystemClock;
 import android.provider.MediaStore;
@@ -18,16 +20,24 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewOutlineProvider;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
 import com.yalantis.ucrop.UCrop;
 
 import androidx.annotation.NonNull;
@@ -68,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -248,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(pickPhoto , 20);
     }
 
+
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
         if (requestCode == 10 || requestCode == 20){
@@ -301,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (tState.equals("b->t")){
                         startActivity(new Intent(MainActivity.this, RecognizeActivity.class).putExtra("file", filename));
                     }else{
-                        Toast.makeText(MainActivity.this, "Эта функция пока не доступна!", Toast.LENGTH_LONG).show();
+                        runTextRecognition(BitmapFactory.decodeFile(dest.getPath()));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -314,6 +326,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final Throwable cropError = UCrop.getError(imageReturnedIntent);
             Log.e("UCropError", cropError.getMessage());
         }
+    }
+
+    boolean canceled = false;
+    private void runTextRecognition(Bitmap bitmap) {
+        ((LinearLayout) findViewById(R.id.loading)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.tvLoading)).setText(getResources().getText(R.string.pleaseWaint));
+        ((ImageView) findViewById(R.id.imagePreview)).setImageBitmap(bitmap);
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+        ((Button) findViewById(R.id.btnCancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                canceled = true;
+                ((LinearLayout) findViewById(R.id.loading)).setVisibility(View.GONE);
+            }
+        });
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+        FirebaseVisionTextDetector detector = FirebaseVision.getInstance().getVisionTextDetector();
+        detector.detectInImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+            @Override
+            public void onSuccess(FirebaseVisionText texts) {
+                if (!canceled){
+                    processExtractedText(texts);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure
+                    (@NonNull Exception exception) {
+                ((TextView) findViewById(R.id.tvLoading)).setText(getResources().getText(R.string.error));
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void processExtractedText(FirebaseVisionText firebaseVisionText) {
+        if (firebaseVisionText.getBlocks().size() == 0) {
+            ((TextView) findViewById(R.id.tvLoading)).setText(getResources().getString(R.string.nodata));
+            return;
+        }
+        StringBuilder rData = new StringBuilder();
+        for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()) {
+            rData.append(block.getText()+"\n");
+        }
+        startActivity(new Intent(MainActivity.this, TextToBraille.class).putExtra("text", rData.toString()));
+        ((LinearLayout) findViewById(R.id.loading)).setVisibility(View.GONE);
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getResources().getString(R.string.clickback), Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                doubleBackToExitPressedOnce=false;
+            }}, 2000);
     }
 
     private void hideIntro(){
@@ -388,11 +460,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_info:
                 showInfoDialog();
                 break;
+            case R.id.nav_share:
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "eCampsus СКФУ");
+                    String shareMessage= "\nBraille Recognition\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "Выберите"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+                break;
         }
         drawer.close();
         return false;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

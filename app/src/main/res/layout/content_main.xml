@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorWelcome"
+    android:animateLayoutChanges="true"
     android:id="@+id/mainPage"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
-
 
     <ImageView
         android:layout_width="match_parent"
@@ -223,6 +223,60 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colotTextHighContrast"
+        android:id="@+id/loading"
+        android:visibility="gone"
+        android:animateLayoutChanges="true"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:elevation="10dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:id="@+id/imagePreview"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/myrect"
+            android:src="@drawable/test"
+            android:layout_height="300dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Подождите..."
+            android:id="@+id/tvLoading"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:layout_width="42dp"
+            android:id="@+id/progressBar"
+            android:visibility="visible"
+            android:layout_marginTop="12dp"
+            android:layout_height="42dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:background="@drawable/btn_action"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:id="@+id/btnCancel"
+            android:textColor="@color/colotTextHighContrast"
+            android:text="@string/cancel"
+            android:layout_marginBottom="12dp"
+            android:drawablePadding="8dp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 
