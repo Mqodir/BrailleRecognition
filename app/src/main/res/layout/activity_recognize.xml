@@ -131,6 +131,7 @@
                         android:drawableStart="@drawable/ic_icons8_share"
                         android:layout_marginLeft="12dp"
                         android:padding="12dp"
+                        android:id="@+id/btnShare"
                         android:textColor="@color/colotTextHighContrast"
                         android:text="@string/share"
                         android:layout_marginBottom="12dp"

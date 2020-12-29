@@ -7,10 +7,12 @@ import androidx.core.content.ContextCompat;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import static uz.mq.braillerecognition.HistoryDB.addToHistory;
@@ -134,6 +137,17 @@ public class RecognizeActivity extends AppCompatActivity {
                                         downloadImage(recognizeResponse.getResultPicUrl());
                                     }
                                 });
+                                ((Button) findViewById(R.id.btnShare)).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        ((ImageView) findViewById(R.id.ivRecognized)).buildDrawingCache();
+                                        Bitmap image = ((ImageView) findViewById(R.id.ivRecognized)).getDrawingCache();
+                                        Intent share = new Intent(Intent.ACTION_SEND);
+                                        share.setType("image/*");
+                                        share.putExtra(Intent.EXTRA_STREAM, getImageUri(RecognizeActivity.this,image));
+                                        startActivity(Intent.createChooser(share,"Share via"));
+                                    }
+                                });
                                 Glide.with(RecognizeActivity.this).load(recognizeResponse.getResultPicUrl()).placeholder(R.drawable.test).into(((ImageView) findViewById(R.id.ivRecognized)));
                                 ((TextView) findViewById(R.id.tvText)).setText(recognizeResponse.getResult());
                                 showLoading(false);
@@ -152,6 +166,13 @@ public class RecognizeActivity extends AppCompatActivity {
             }
         }).start();
     }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
     private void setActionBar(){
         getSupportActionBar().setTitle((Html.fromHtml("<font align=\"center\" color=\""+String.format("#%06x", ContextCompat.getColor(this, R.color.colorText) & 0xffffff)+"\">"+getString(R.string.app_name)+"</font>")));
         getSupportActionBar().setElevation(0);
