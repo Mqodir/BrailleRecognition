@@ -100,6 +100,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="3"
+                    android:id="@+id/llFrom"
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content">
                     <ImageView
@@ -119,11 +120,13 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:padding="2dp"
+                    android:id="@+id/ivArrow"
                     android:src="@drawable/ic_icons8_data_transfer"
                     android:layout_height="26dp"/>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="3"
+                    android:id="@+id/llTo"
                     android:gravity="center_vertical|right"
                     android:layout_height="wrap_content">
                     <TextView

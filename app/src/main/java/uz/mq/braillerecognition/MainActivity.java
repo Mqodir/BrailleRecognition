@@ -1,6 +1,8 @@
 package uz.mq.braillerecognition;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -437,17 +439,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void switchTranslation(final String newState){
-        bottomActionBar.animate()
-                .scaleX(0.0f)
-                .scaleY(0.4f)
-                .setDuration(400);
+        final LinearLayout llFrom = (LinearLayout) findViewById(R.id.llFrom);
+        final LinearLayout llTo = (LinearLayout) findViewById(R.id.llTo);
+        ImageView ivArrow = (ImageView) findViewById(R.id.ivArrow);
+        llFrom.animate().translationX(130).setDuration(300);
+        llFrom.animate().alpha(0).setDuration(200);
+        llTo.animate().translationX(-130).setDuration(300);
+        llTo.animate().alpha(0).setDuration(200);
+        ivArrow.animate().rotationBy(180).setDuration(300);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(400);
+                SystemClock.sleep(200);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        llFrom.animate().translationX(0).setDuration(300);
+                        llFrom.animate().alpha(1).setDuration(400);
+                        llTo.animate().translationX(0).setDuration(300);
+                        llTo.animate().alpha(1).setDuration(400);
+
                         if (newState.equals("t->b")){
                             ((TextView) findViewById(R.id.tvLeft)).setText(getResources().getString(R.string.text));
                             ((ImageView) findViewById(R.id.ivLeft)).setImageResource(R.drawable.ic_icons8_z);
@@ -461,14 +472,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             ((ImageView) findViewById(R.id.ivRight)).setImageResource(R.drawable.ic_icons8_z);
                             ((ImageView) findViewById(R.id.ivKeyboard)).setImageResource(R.drawable.ic_icons8_braille);
                         }
-                        bottomActionBar.animate()
-                                .scaleX(1.0f)
-                                .scaleY(1.0f)
-                                .setDuration(400);
+
                         tState = newState;
                     }
                 });
-
             }
         }).start();
     }
