@@ -8,4 +8,6 @@
     <color name="colotTextHighContrast">#ffffff</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorAccentLight">#E0EEEE</color>
+    <color name="colorDanger">#E74856</color>
+    <color name="colorPerfect">#498260</color>
 </resources>

@@ -60,6 +60,11 @@ public class HistoryDB {
         sharedPreference.edit().putString("History", gson.toJson(historyModels)).apply();
     }
 
+    public static void clearHistory(Context ctx){
+        SharedPreferences sharedPreference = ctx.getSharedPreferences("History", Context.MODE_PRIVATE);
+        sharedPreference.edit().putString("History", "empty").apply();
+    }
+
     public static ArrayList<HistoryModel> getHistory(Context ctx){
         ArrayList<HistoryModel> historyModels = new ArrayList<>();
         Gson gson = new Gson();

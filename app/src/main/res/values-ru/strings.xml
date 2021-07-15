@@ -32,6 +32,9 @@
 
     <string name="selLang">Выберите язык</string>
     <string name="switchLang">Язык</string>
+    <string name="clearHistory">Очистить историю</string>
+    <string name="sure">Вы уверены?</string>
+    <string name="yes">Да</string>
 
     <string name="pleaseWaint">Пожалуйста подождите</string>
     <string name="error">Ошибка пожалуйста попробуйте снова!</string>

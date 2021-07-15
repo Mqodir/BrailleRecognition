@@ -4,7 +4,9 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -63,6 +65,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Time;
+import uz.mq.braillerecognition.Utils;
 
 import okhttp3.internal.Util;
 
@@ -436,6 +439,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ((ImageView) findViewById(R.id.welcome_illustration)).setVisibility(View.GONE);
         ((TextView) findViewById(R.id.tvWelcome)).setVisibility(View.GONE);
         ((TextView) findViewById(R.id.instruction)).setVisibility(View.GONE);
+        historyList.setVisibility(View.VISIBLE);
+    }
+
+    private void showIntro(){
+        ((ConstraintLayout) findViewById(R.id.mainPage)).setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        ((ImageView) findViewById(R.id.welcome_illustration)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.tvWelcome)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.instruction)).setVisibility(View.VISIBLE);
+        historyList.setVisibility(View.GONE);
     }
 
     private void switchTranslation(final String newState){
@@ -558,8 +570,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case android.R.id.home:
                 drawer.openDrawer(Gravity.LEFT);
                 break;
-            case R.id.action_info:
-                showInfoDialog();
+            case R.id.action_clear:
+                if (getHistory(MainActivity.this).size() > 0){
+                    final BottomSheetDialog bottomSheerDialog = new BottomSheetDialog(MainActivity.this, R.style.SheetDialog);
+                    final View parentView = getLayoutInflater().inflate(R.layout.confirm_dialog ,null);
+                    ((FloatingActionButton) parentView.findViewById(R.id.btnCancel)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            bottomSheerDialog.dismiss();
+                        }
+                    });
+                    ((FloatingActionButton) parentView.findViewById(R.id.btnOk)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HistoryDB.clearHistory(MainActivity.this);
+                            bottomSheerDialog.dismiss();
+                            showIntro();
+                        }
+                    });
+                    bottomSheerDialog.setContentView(parentView);
+                    bottomSheerDialog.show();
+                }else{
+                    Toast.makeText(MainActivity.this, R.string.empty, Toast.LENGTH_LONG).show();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);

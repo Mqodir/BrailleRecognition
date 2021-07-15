@@ -26,6 +26,9 @@
     <string name="share">Share</string>
     <string name="rate">Rate</string>
     <string name="info">About app</string>
+    <string name="clearHistory">Clear history</string>
+    <string name="sure">Are you sure?</string>
+    <string name="yes">Yes</string>
 
     <string name="translation">Translation:</string>
     <string name="translation_">Translate to:</string>

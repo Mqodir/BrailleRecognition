@@ -29,7 +29,10 @@
 
     <string name="translation">Tarjima:</string>
     <string name="translation_">Ga tarjima:</string>
+    <string name="sure">Qaroringiz qatiymi?</string>
+    <string name="yes">Xa</string>
 
+    <string name="clearHistory">Tarixni tozalash</string>
     <string name="selLang">Tilni tanlang</string>
     <string name="switchLang">Til</string>
 
