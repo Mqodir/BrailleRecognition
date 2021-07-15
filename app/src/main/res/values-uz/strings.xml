@@ -16,9 +16,9 @@
     <string name="importImg">Import</string>
     <string name="keyboard">Klaviatura</string>
     <string name="braille">Brayl</string>
-    <string name="text">Text</string>
+    <string name="text">Odatiy</string>
     <string name="welcomle">Xush kelibsiz!</string>
-    <string name="instruction">Boshlanishiga tarjina turi va ma\'lumotlarni kiritish uslubini tanlang</string>
+    <string name="instruction">Boshlanishiga tarjima turi va ma\'lumotlarni kiritish uslubini tanlang</string>
 
     <string name="empty">Malumotlar yo\'q</string>
     <string name="history">Tarix</string>
@@ -36,14 +36,14 @@
     <string name="clickback">Ilovdan chiqish uchun yana bir bor bosing</string>
     <string name="cancel">Bekor qilish</string>
     <string name="recognize_as">Qaysi alifbodan tarjina qilish:</string>
-    <string name="cyril">Kiril</string>
-    <string name="latin">Lotin</string>
+    <string name="cyril">Kirilcha</string>
+    <string name="latin">Lotincha</string>
     <string name="save">Saqlash</string>
     <string name="recognized_text">Tarjima qilingan matn:</string>
     <string name="developed_by">Quyidagi komanda tomonidan ishlab chiqilgan:</string>
     <string-array name="ABC">
-        <item>Lotin</item>
-        <item>Kiril</item>
+        <item>Lotincha</item>
+        <item>Kirilcha</item>
     </string-array>
 
     <string name="select_image">Rasmni tanlang</string>

@@ -18,12 +18,12 @@
     <string name="braille">Брайль</string>
     <string name="text">Текст</string>
     <string name="welcomle">Добро пожаловать!</string>
-    <string name="instruction">Для начало выберите тип перевода и способ ввода данных</string>
+    <string name="instruction">Для начала выберите тип перевода и способ ввода данных</string>
 
     <string name="empty">Пусто</string>
     <string name="history">История</string>
     <string name="favorite">Избранное</string>
-    <string name="share">Поделится</string>
+    <string name="share">Поделиться</string>
     <string name="rate">Оценить</string>
     <string name="info">О приложении</string>
 
@@ -31,18 +31,18 @@
     <string name="translation_">Перевод на:</string>
 
     <string name="pleaseWaint">Пожалуйста подождите</string>
-    <string name="error">Ошибка пожалуйста попробуйте сново!</string>
+    <string name="error">Ошибка пожалуйста попробуйте снова!</string>
     <string name="nodata">Не удалось распознать текст пожалуйста попробуйте снова!</string>
-    <string name="clickback">Нажмите ещё раз для выхода из приложения</string>
+    <string name="clickback">Нажмите еще раз для выхода</string>
     <string name="cancel">Отмена</string>
     <string name="recognize_as">Распознать как:</string>
     <string name="cyril">Кириллица</string>
-    <string name="latin">Латын</string>
+    <string name="latin">Латиница</string>
     <string name="save">Сохранить</string>
-    <string name="recognized_text">Расспознанный текст:</string>
+    <string name="recognized_text">Распознанный текст:</string>
     <string name="developed_by">Разработано командой:</string>
     <string-array name="ABC">
-        <item>Латын</item>
+        <item>Латиница</item>
         <item>Кириллица</item>
     </string-array>
 
