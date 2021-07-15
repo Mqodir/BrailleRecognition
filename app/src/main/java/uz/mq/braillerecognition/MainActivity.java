@@ -1,6 +1,7 @@
 package uz.mq.braillerecognition;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -60,6 +61,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Time;
+
+import okhttp3.internal.Util;
 
 import static uz.mq.braillerecognition.HistoryDB.getHistory;
 
@@ -231,6 +234,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final BottomSheetDialog bottomSheerDialog = new BottomSheetDialog(MainActivity.this, R.style.SheetDialog);
         final View parentView = getLayoutInflater().inflate(R.layout.info ,null);
+
+        bottomSheerDialog.setContentView(parentView);
+        bottomSheerDialog.show();
+    }
+
+
+    private void showLangDialog(){
+
+        final BottomSheetDialog bottomSheerDialog = new BottomSheetDialog(MainActivity.this, R.style.SheetDialog);
+        final View parentView = getLayoutInflater().inflate(R.layout.lang_dialog ,null);
+
+        ((TextView) parentView.findViewById(R.id.btnUSA)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.setLocale((Activity) MainActivity.this, "en");
+                bottomSheerDialog.dismiss();
+                MainActivity.this.recreate();
+            }
+        });
+
+        ((TextView) parentView.findViewById(R.id.btnRUS)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.setLocale((Activity) MainActivity.this, "ru");
+                bottomSheerDialog.dismiss();
+                MainActivity.this.recreate();
+            }
+        });
+
+        ((TextView) parentView.findViewById(R.id.btnUZB)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.setLocale((Activity) MainActivity.this, "uz");
+                bottomSheerDialog.dismiss();
+                MainActivity.this.recreate();
+            }
+        });
 
         bottomSheerDialog.setContentView(parentView);
         bottomSheerDialog.show();
@@ -460,6 +500,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_info:
                 showInfoDialog();
+                break;
+            case R.id.nav_lang:
+                showLangDialog();
                 break;
             case R.id.nav_share:
                 try {

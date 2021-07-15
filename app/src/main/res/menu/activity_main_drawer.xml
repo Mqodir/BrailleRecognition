@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_icons8_star"
             android:title="@string/favorite" />
         <item
+            android:id="@+id/nav_lang"
+            android:icon="@drawable/ic_lang"
+            android:title="@string/switchLang" />
+        <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_icons8_share"
             android:title="@string/share" />

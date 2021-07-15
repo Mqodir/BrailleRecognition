@@ -30,6 +30,9 @@
     <string name="translation">Перевод:</string>
     <string name="translation_">Перевод на:</string>
 
+    <string name="selLang">Выберите язык</string>
+    <string name="switchLang">Язык</string>
+
     <string name="pleaseWaint">Пожалуйста подождите</string>
     <string name="error">Ошибка пожалуйста попробуйте снова!</string>
     <string name="nodata">Не удалось распознать текст пожалуйста попробуйте снова!</string>
