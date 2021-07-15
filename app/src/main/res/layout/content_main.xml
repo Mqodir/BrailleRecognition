@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorWelcome"
+    android:background="@color/colorWhite"
     android:animateLayoutChanges="true"
     android:id="@+id/mainPage"
     android:layout_height="match_parent"
@@ -11,14 +11,15 @@
     tools:showIn="@layout/app_bar_main">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:src="@drawable/illustration"
+        android:layout_width="300dp"
+        android:src="@drawable/ic_start_illustration"
         android:scaleType="fitStart"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintBottom_toTopOf="@id/instruction"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/welcome_illustration"
-        android:layout_height="wrap_content"/>
+        android:layout_height="300dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -94,7 +95,7 @@
                 android:gravity="center"
                 android:id="@+id/btnChange"
                 android:clickable="true"
-                android:background="@drawable/btn_white"
+                android:background="@drawable/btn_switch"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="0dp"
@@ -171,8 +172,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:text="@string/camera"
+                        android:ellipsize="end"
+                        android:lines="1"
                         android:layout_marginTop="4dp"
-                        android:textSize="16dp"
                         android:textColor="@color/colotTextHighContrast"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -193,7 +195,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:text="@string/importImg"
-                        android:textSize="16dp"
+                        android:ellipsize="end"
+                        android:lines="1"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/colotTextHighContrast"
                         android:layout_height="wrap_content"/>
@@ -216,7 +219,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:text="@string/keyboard"
-                        android:textSize="16dp"
+                        android:ellipsize="end"
+                        android:lines="1"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/colotTextHighContrast"
                         android:layout_height="wrap_content"/>
