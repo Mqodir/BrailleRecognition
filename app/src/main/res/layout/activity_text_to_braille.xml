@@ -27,7 +27,9 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:minLines="3"
+                        android:hint="@string/typeHere"
                         android:id="@+id/edText"
+                        android:textColorHint="#99ffffff"
                         android:background="@android:color/transparent"
                         android:gravity="top|left"
                         android:textColor="@color/colotTextHighContrast"

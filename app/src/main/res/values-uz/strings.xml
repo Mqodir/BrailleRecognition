@@ -31,6 +31,8 @@
     <string name="translation_">Ga tarjima:</string>
     <string name="sure">Qaroringiz qatiymi?</string>
     <string name="yes">Xa</string>
+    <string name="typeHere">Bu yerga yozing…</string>
+    <string name="typedSymbols">Kiritilgan belgilar</string>
 
     <string name="clearHistory">Tarixni tozalash</string>
     <string name="selLang">Tilni tanlang</string>

@@ -35,6 +35,8 @@
     <string name="clearHistory">Очистить историю</string>
     <string name="sure">Вы уверены?</string>
     <string name="yes">Да</string>
+    <string name="typeHere">Введите текст здесь…</string>
+    <string name="typedSymbols">Введённые символы</string>
 
     <string name="pleaseWaint">Пожалуйста подождите</string>
     <string name="error">Ошибка пожалуйста попробуйте снова!</string>

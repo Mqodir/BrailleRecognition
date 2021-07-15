@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -149,7 +150,7 @@ public class RecognizeActivity extends AppCompatActivity {
                                     }
                                 });
                                 Glide.with(RecognizeActivity.this).load(recognizeResponse.getResultPicUrl()).placeholder(R.drawable.test).into(((ImageView) findViewById(R.id.ivRecognized)));
-                                ((TextView) findViewById(R.id.tvText)).setText(recognizeResponse.getResult());
+                                ((EditText) findViewById(R.id.tvText)).setText(recognizeResponse.getResult());
                                 showLoading(false);
                             }
                         }
@@ -166,6 +167,7 @@ public class RecognizeActivity extends AppCompatActivity {
             }
         }).start();
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
